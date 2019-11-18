@@ -1,0 +1,105 @@
+%!TEX root = view.tex
+
+   \definecolor{package_ext}{HTML}{727081}
+    \draw[fill=package_ext!60!black, rounded corners=2pt] (0,0) rectangle (5,2);
+    \draw[fill=package_ext, rounded corners=2pt] (0+0.1,0+0.1) rectangle (5-0.1,2-0.1);
+    \draw[fill=package_ext!60!black, draw=none] (0.1,1.9) rectangle (3,1.1);
+    \draw[fill=package_ext!60!black, draw=none] (0.1,0.1) rectangle (4.9,0.6);
+    \draw[fill=package_ext!80!black, draw=none] (0.1,0.6) rectangle (4.9,0.7);
+    \draw[rounded corners=2pt] (0+0.1,0+0.1) rectangle (5-0.1,2-0.1);
+
+    \draw (3.5,1.5) coordinate (ru1);
+    \draw (4,1.5) coordinate (ru2);
+    \draw (4.5,1.5) coordinate (ru3);
+        \draw[fill=gray!50!white] (ru1) circle (4pt);
+        \draw (ru1) -- ++ (45:4pt);
+        \draw[fill=gray] (ru1) circle (2pt);
+        \draw[fill=gray!50!white] (ru2) circle (4pt);
+        \draw (ru2) -- ++ (45:4pt);
+        \draw[fill=gray] (ru2) circle (2pt);
+        \draw[fill=gray!50!white] (ru3) circle (4pt);
+        \draw (ru3) -- ++ (45:4pt);
+        \draw[fill=gray] (ru3) circle (2pt);
+
+        \draw[fill=black!70!gray,rounded corners=1.5pt] ($(ru1)-(0.1cm,0.35cm)$) rectangle ++ (0.2,0.1);
+        \draw[fill=black!70!gray,rounded corners=1.5pt] ($(ru2)-(0.1cm,0.35cm)$) rectangle ++ (0.2,0.1);
+        \draw[fill=black!70!gray,rounded corners=1.5pt] ($(ru3)-(0.1cm,0.35cm)$) rectangle ++ (0.2,0.1);
+
+    \foreach \x in {3.5,3.75,4,4.37,4.63,2.9,2.65,2.4,2.15,1.9,1.65}{
+        \draw[fill=black!70!gray,rounded corners=1.5pt] ($(\x,.75cm)-(0.1cm,0cm)$) rectangle ++ (0.2,0.1);
+    }
+        \draw[fill=white!70!gray,rounded corners=1.5pt] ($(1.25,.75cm)-(0.1cm,0cm)$) rectangle ++ (0.2,0.1);
+        \draw[fill=white!70!gray,rounded corners=1.5pt] ($(0.5,.32cm)-(0.15cm,0cm)$) rectangle ++ (0.3,0.15);
+
+    \foreach \x in {1.25,3.5,4,4.5}{
+        \draw (\x,0.4) coordinate (ru1);
+        \draw (\x,0.4) coordinate (gen-output);
+        \draw[white!80!black] (ru1) -- ++ (-30:4pt) -- ++ (0:0.1) -- ++ (-90:0.1)
+            -- ++(0.1, 0) -- ++ (-0.2,0) coordinate (e);
+            \draw[white!80!black] ($(e)+(0.05,-0.04)$) -- ++ (0.2-0.09,0);
+            \draw[white!80!black] ($(e)+(0.09,-0.08)$) -- ++ (0.2-0.18,0);
+        \draw[fill=gray, draw=white, line width=.5pt] (ru1) circle (4pt);
+        \draw[fill=white,draw=none] (ru1) circle (2pt);
+        \draw[fill=black,draw=none] (ru1) circle (1pt);
+    }
+
+    \draw ($(1.25,0.4)!0.5!(3.5,0.4)$) coordinate (ru1);
+        \draw[fill=gray!50!white] (ru1) circle (4pt) pic[white!50!gray, -{Latex[length=1pt,width=1pt]}]{carc=140:{180+40}:5.8pt};
+        \draw (ru1) ++ (220:5.7pt) node [below=1pt,scale=0.16,white!50!gray] {\textsc{\textbf{LOW}}};
+        \draw[fill=gray!50!white] (ru1) circle (4pt) pic[white!50!gray, -{Latex[length=1pt,width=1pt]}]{carc={40}:{-40}:5.8pt};
+        \draw (ru1) ++ ({-40}:5.7pt) node [below=1pt,scale=0.16,white!50!gray] {\textsf{\textbf{HIGH}}};
+        \draw (ru1) -- ++ (45:4pt);
+        \draw[fill=gray] (ru1) circle (2pt);
+
+    \foreach \x in {3.5,4,4.5}{
+        \draw (\x,1.5) coordinate (ru1);
+        \draw[fill=gray!50!white] (ru1)  pic[white!50!gray, -{Latex[length=1pt,width=1pt]}]{carc=140:{180+40}:5.8pt};
+\draw[fill=gray!50!white] (ru1)  pic[white!50!gray, -{Latex[length=1pt,width=1pt]}]{carc={40}:{-40}:5.8pt};
+    }
+
+    \draw (0.35,1.1) node [below=1pt,scale=0.35,white!90!gray, text width=1cm] {\textsf{\textbf{FUNCTION \\ GENERATOR}}};
+
+
+    \draw[fill=black!80!red] (0.2,1.15) rectangle (2.85,1.65);
+    \draw[fill=black!40!gray] (0.2,1.8) rectangle (2.85,1.65);
+    \draw[fill=magenta!20!red!80!gray] (0.2,1.8) rectangle (0.7,1.65);
+    \draw (0.2,1.722) node [right,scale=0.39,white] {\textsf{\textbf{UNI-T}}}
+    node [right=0.7cm,scale=0.39,white!50!gray] {\textsf{\textbf{UTG9010C}}}
+    node [right=2cm,scale=0.39,white!50!gray] {\textsf{\textbf{10MHz}}};
+
+    \begin{scope}[yshift=-0.1cm, xshift=0.15cm]
+    \draw (0.2,1.5) node [yscale=0.5, xscale=0.45] {\sevensegnum[slant = 4,offcolor=red!10!black]{1}};
+    \draw (0.5,1.5) node [yscale=0.5, xscale=0.45] {\sevensegnum[slant = 4,offcolor=red!10!black]{4}};
+    \draw (0.8,1.5) node [yscale=0.5, xscale=0.45] {\sevensegnum[slant = 4,offcolor=red!10!black]{2}};
+    \draw (1.1,1.5) node [yscale=0.5, xscale=0.45] {\sevensegnum[slant = 4,offcolor=red!10!black]{5}};
+
+    \draw[fill=red, draw=none] 
+        (0.93,{1.5-0.195}) -- ++ ({90-4}:1pt) -- ++ (1pt,0) -- ++ ({-90-4}:1pt) -- cycle;     
+    \end{scope}
+
+    \begin{scope}[yshift=-0.1cm, xshift=1.35cm]
+    \draw (0.5,1.5) node [yscale=0.5, xscale=0.45] {\sevensegnum[slant = 4,offcolor=red!10!black]{}};
+    \draw (0.8,1.5) node [yscale=0.5, xscale=0.45] {\sevensegnum[slant = 4,offcolor=red!10!black]{3}};
+    \draw (1.1,1.5) node [yscale=0.5, xscale=0.45] {\sevensegnum[slant = 4,offcolor=red!10!black]{5}};
+
+    \draw[fill=red, draw=none] 
+        (0.93,{1.5-0.195}) -- ++ ({90-4}:1pt) -- ++ (1pt,0) -- ++ ({-90-4}:1pt) -- cycle;     
+    \end{scope}
+
+    \draw (2.7,1.52) coordinate (a);
+    \draw[scale=0.8,fill=red, draw=gray, rounded corners=1pt] ($(a)-(0.12,0.07)$) rectangle ($(a)+(0.12,0.07)$);
+    \draw (a) node[scale=.3, white] (a) {\textbf{\textsf{V}}};
+
+    \draw (2.7,1.3) coordinate (a);
+    \draw[scale=0.8, draw=gray, rounded corners=1pt] ($(a)-(0.12,0.07)$) rectangle ($(a)+(0.12,0.07)$);
+    \draw (a) node[scale=.3, white] (a) {\textbf{\textsf{mV}}};
+
+    \draw (1.6,1.4) coordinate (a);
+    \draw[scale=0.8, draw=gray, rounded corners=1pt,fill=red] ($(a)-(0.12,0.07)$) rectangle ($(a)+(0.12,0.07)$);
+    \draw (a) node[scale=.3, white] (a) {\textbf{\textsf{k}}};
+    \draw (1.6,1.55) coordinate (a);
+    \draw[scale=0.8, draw=gray, rounded corners=1pt] ($(a)-(0.12,0.07)$) rectangle ($(a)+(0.12,0.07)$);
+    \draw (a) node[scale=.3, white] (a) {\textbf{\textsf{M}}};
+    \draw (1.6,1.25) coordinate (a);
+    \draw[scale=0.8, draw=gray, rounded corners=1pt] ($(a)-(0.12,0.07)$) rectangle ($(a)+(0.12,0.07)$);
+    \draw (a) node[scale=.3, white] (a) {\textbf{\textsf{Hz}}};

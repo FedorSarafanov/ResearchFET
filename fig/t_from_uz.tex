@@ -1,0 +1,118 @@
+\documentclass[tikz]{standalone}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+% \usepackage[utf8x]{inputenc}
+
+\usepackage[russian]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{pgfplotstable}
+\input{colors}
+% ochre lightorange lightyellow lightgreen osci sky violet 
+\usepackage{pgfplots}
+\begin{document}
+\pgfplotstableset{
+	create on use/uz/.style={
+	    create col/expr={
+	    \thisrow{e2}/10
+	    }
+	},
+	create on use/du/.style={
+	    create col/expr={
+	    (0.005*\thisrow{e2}+0.2)/10
+	    }
+	},
+	create on use/dt/.style={
+	create col/expr={
+		0.05
+		}
+	},
+	create on use/t/.style={
+	create col/expr={
+		\thisrow{t1}+\thisrow{t2}
+		}
+	},
+}
+	\begin{tikzpicture}
+		    \begin{axis}[
+			grid=both,
+			scale=1,
+			height=5cm,
+			width=10cm,
+			% xmode=log,
+			grid style={line width=.1pt, draw=gray!10},
+			major grid style={line width=.2pt,draw=gray!50},
+			% axis lines=middle,
+			% minor tick num=5,
+			% xmin=1000, 
+			% xmax=11,
+			% ymin=0,
+			ymax=3.5,
+			ymin=1.5,
+			xlabel={$U_z$, В},
+			ylabel={$t_\uparrow+t_\downarrow$, мкс},
+			tick style={very thick},
+		    % scale=0.5,
+		    grid=both,
+		    grid style={line width=.3pt, draw=black!20},
+		    major grid style={line width=.1pt,draw=black!90},
+		    minor y tick num=4,
+		    minor x tick num=4,
+		    % minor x tick num=4,   
+			% xmode=log,
+			% ymode=log,
+		    % xmode=log,ymode=normal,
+		    % ytick distance=0.1,
+		    % xtick distance=250,
+		    % ytick distance=0.098171875,
+		    % ymax = 1.8,
+		    % xmin = 100,
+		    % xmax = 1000,
+		    % ymin = ,
+		    % xmin=-0.1,
+		    % ymax = 15,
+		    /pgf/number format/.cd,
+		    1000 sep={},
+		    x tick label style={scale=0.8},
+		    y tick label style={scale=0.8},
+		    % unit vector ratio*=1 100,
+			% yticklabel={
+			% \pgfmathparse{\tick/0.098171875/32}
+			% \pgfmathifisint{\pgfmathresult}{$\pgfmathprintnumber[int detect]{\pgfmathresult}{}$}%
+			% {%
+	  %          {$\pgfmathprintnumber[frac, frac denom=32,frac whole=false]{\pgfmathresult}\pi$}
+			% }{}
+			% },	
+			% yticklabel={0}			
+			% ytick={1.5707,0.7853,1,2}, 
+			% yticklabels={$\frac{\pi}{2}$,%
+			% $\frac{\pi}{4}$
+			% 1},			
+		    % xmax = 40,
+		    % ticklabel style={font=\tiny,fill=white},    
+		    % axis lines=middle, 	
+		    % xlabel style={right, xshift=1em},
+		    % ylabel style={above},	
+		    x label style={at={(axis description cs:0.5,-0.02)},anchor=center},
+		    y label style={at={(axis description cs:0.05,0.5)}}	,
+		     % y dir=reverse
+		     % restrict y to domain=0:2,    		
+		     % restrict x to domain=0:3000,    		
+			% legend style={
+			% at={(rel axis cs:0,1)},
+			% anchor=north west,draw=none,inner sep=0pt,fill=gray!10}
+		legend style={
+			% cells={anchor=east},
+			legend pos=north east,
+		}
+		]
+	     % \xdef\C{5e-8}
+	     % \xdef\R{13000}
+		\addplot +[mark=*, line width=1pt, mark size=1pt, solid,ochre] plot [error bars/.cd, y dir = both, y explicit,x dir = both, x explicit] table [ x=uz, y=t, y error=dt, x error=du] {../data/ex9.tsv};
+
+
+		    \end{axis}
+		\end{tikzpicture}	
+\end{document}

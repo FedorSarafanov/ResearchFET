@@ -8,21 +8,33 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
-\usepackage{pgfplots}
 \usepackage{pgfplotstable}
+\input{colors}
+% ochre lightorange lightyellow lightgreen osci sky violet 
+\usepackage{pgfplots}
 \begin{document}
 \pgfplotstableset{
-	% create on use/f/.style={
-	%     create col/expr={
-	%     \thisrow{uo}*1
-	%     }
-	% },
+	create on use/uz/.style={
+	    create col/expr={
+	    -\thisrow{e2}/10
+	    }
+	},
+	create on use/du/.style={
+	    create col/expr={
+	    (0.005*\thisrow{e2}+0.2)/10
+	    }
+	},
+	create on use/di/.style={
+	    create col/expr={
+	    (0.01*\thisrow{ic}+0.04)
+	    }
+	},
 }
 	\begin{tikzpicture}
 		    \begin{axis}[
 			grid=both,
 			scale=1,
-			height=6cm,
+			height=7cm,
 			width=10cm,
 			% xmode=log,
 			grid style={line width=.1pt, draw=gray!10},
@@ -33,8 +45,8 @@
 			% xmax=11,
 			% ymin=0,
 			% ymax=5,
-			xlabel={$\Delta X$, см},
-			ylabel={$I_\text{д}$, мА},
+			xlabel={$U_z$, В},
+			ylabel={$I_c$, мА},
 			tick style={very thick},
 		    % scale=0.5,
 		    grid=both,
@@ -52,7 +64,9 @@
 		    % ymax = 1.8,
 		    % xmin = 100,
 		    % xmax = 1000,
-		    % ymin = 0,
+		    % ymin = ,
+		    % xmin=-0.1,
+		    % ymax = 15,
 		    /pgf/number format/.cd,
 		    1000 sep={},
 		    x tick label style={scale=0.8},
@@ -75,8 +89,8 @@
 		    % axis lines=middle, 	
 		    % xlabel style={right, xshift=1em},
 		    % ylabel style={above},	
-		    % x label style={at={(axis description cs:0.5,-0.08)},anchor=north},
-		    % y label style={at={(axis description cs:-0.08,.5)},rotate=90,anchor=south}	,
+		    x label style={at={(axis description cs:0.5,-0.02)},anchor=center},
+		    y label style={at={(axis description cs:0.05,0.5)}}	,
 		     % y dir=reverse
 		     % restrict y to domain=0:2,    		
 		     % restrict x to domain=0:3000,    		
@@ -90,11 +104,19 @@
 		]
 	     % \xdef\C{5e-8}
 	     % \xdef\R{13000}
-		\addplot +[mark=*, line width=1.2pt, mark size=1.5pt, solid,blue] plot [error bars/.cd, y dir = both, y explicit] table [ x=Dx, y=e2, ] {../data/ex2.tsv};
-		% \addlegendentry{$U_\text{рез}=150$ В}
+
+		\addplot +[mark=*, line width=0.4pt, mark size=0.4pt, solid,draw=lightorange] plot [error bars/.cd, y dir = both, y explicit,x dir = both, x explicit] table [ x=uz, y=ic, y error=di, x error=du] {../data/ex3.tsv};
+		\addlegendentry{$U_c=10$ В}
+		\addplot +[mark=*, line width=0.4pt, mark size=0.4pt, solid,violet] plot [error bars/.cd, y dir = both, y explicit,x dir = both, x explicit] table [ x=uz, y=ic, y error=di, x error=du] {../data/ex2.tsv};
+		\addlegendentry{$U_c=2\hphantom{0}$ В}
+
+		\addplot +[mark=*, line width=0.4pt, mark size=0.4pt, solid,ochre] plot [error bars/.cd, y dir = both, y explicit,x dir = both, x explicit] table [ x=uz, y=ic, y error=di, x error=du] {../data/ex1.tsv};
+		\addlegendentry{$U_c=0.5$ В}
 		% \addplot +[mark=square*, line width=1.2pt, mark size=3pt, solid,red] plot [error bars/.cd, y dir = both, y explicit] table [ x=ip, y=id, ] {../data/5a2.tsv};\addlegendentry{$U_\text{рез}=120$ В}
 		% \addplot +[mark=triangle*, line width=1.2pt, mark size=3pt, solid,magenta] plot [error bars/.cd, y dir = both, y explicit] table [ x=ip, y=id, ] {../data/5a3.tsv};\addlegendentry{$U_\text{рез}=\hphantom{1}90$ В}
-
+		% \addplot[color=red,samples=10, domain=-2:0]{2.54*(x+1.7)}; 10v
+		% \addplot[color=blue,samples=10, domain=-2:0]{8.52*(x+1.33)}; 2v
+		% \addplot[color=ochre,samples=10, domain=-2:0]{10.36*(x+1.26)}; 0.5v
 		    \end{axis}
 		\end{tikzpicture}	
 \end{document}

@@ -1,0 +1,61 @@
+%!TEX root = view.tex
+
+% \documentclass[border=0pt]{standalone}
+% \usepackage[europeanresistors,americaninductors,rotatelabels]{circuitikz}
+
+% \usepackage{xcolor}
+% \definecolor{ochre}{HTML}{e2431e} % #e2431e 0
+% \definecolor{lightorange}{HTML}{e7711b} % #e7711b 1
+% \definecolor{lightyellow}{HTML}{f1ca3a} % #f1ca3a 2
+% \definecolor{lightgreen}{HTML}{6f9654} % #6f9654 3
+% \definecolor{osci}{HTML}{82FF27}%#82FF27
+% \definecolor{sky}{HTML}{1c91c0} % #1c91c0 4
+% \definecolor{violet}{HTML}{43459d} % #43459d 5
+
+
+% \begin{document}
+\tikzset{Rs/.style={}}
+\ctikzset{bipoles/length=0.8cm}
+
+% \begin{circuitikz}[scale=1.1]
+% 	\xdef\darkness{10}
+% 	\xdef\opa{0.11}
+
+	\tikzstyle{every node}=[font=\footnotesize, text=black]
+
+	\begin{scope}[color=black,yshift=2.1cm,xshift=1.5cm,scale=1.1]
+	% \xdef\SIZE{3}
+	% \xdef\setka{1}
+	% \begin{scope}[yshift=-2.1cm, xshift=-1.5cm]
+	% 	\input{setka}
+	% \end{scope}
+
+	\draw[yshift=-2.1cm, xshift=-1.5cm,fill=black!1!white,dashed] (0,0) rectangle (3,3);
+
+			\draw (0,0) node[njfet, scale=1] (fet) {} node[right, xshift=0.5em,yshift=0em] {} ++(-0.2,0) circle(0.35);
+			
+			\draw (fet.G) -- ++ (-0.1,0) coordinate (fetG) -| ++ (0,0.54) 
+				to[C,l^=$C_1$] ++ (-0.9,0) coordinate (input);
+
+			\draw (fet.D) -- node[pos=0.333] (fetD) {}
+				++ (1.5,0) coordinate (output);
+
+			\draw (fetD) to[short,*-] ++ (0,-1) coordinate (fetD2)
+						 to[short,*-] ++ (1,0) coordinate (inputD);
+
+
+			\draw (fetD2) to ++ (0,-1) to[R, l^=$R_3$] ++ (1,0) coordinate (inputR3);
+
+			\draw (fetG) to ++ (-0.3,0) to[R,l_=$R_1$] ++ (0,-1.455) to ++(-0.6,0) coordinate (inputR1);
+
+			\draw (fetG)  to[short,*-*,R,l^=$R_2$] ++ (0,-1.455) coordinate (R2);
+
+			\draw (fet.S) -- ++ (0,-1.195) coordinate (fetS);
+
+			\draw (fetS) to[short,*-] (R2) to ++ (-0.15,0) to ++(0,-0.5) coordinate (inputR2);
+			\draw (fetS) -- ++(0.25,0) to ++(0,-0.5) coordinate (inputS);
+	\end{scope}
+
+
+% \end{circuitikz}
+% \end{document}

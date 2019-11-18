@@ -1,0 +1,162 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[english,russian]{babel}
+\usepackage[T2A,T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\input{tikz.tex} 
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+\usepackage
+    {
+        tikz,
+        pgfplots,
+        verbatim,
+        bm
+    }
+\usetikzlibrary
+    {
+        arrows,
+        patterns,
+        angles,
+        quotes,
+        arrows.meta,
+        arrows.spaced,
+        calc, 
+        3d,  
+        fit,
+        backgrounds, 
+        positioning
+    }
+\usetikzlibrary{fadings,through}
+\tikzset
+    {
+        media/.style={font={\footnotesize\sffamily}},
+        wave/.style={
+            decorate,decoration={snake,post length=1.4mm,amplitude=2mm,
+                segment length=1mm},thick},   
+    }
+\tikzset{
+  pics/carc/.style args={#1:#2:#3}{
+    code={
+      \draw[pic actions] (#1:#3) arc(#1:#2:#3);
+    }
+  }
+}
+
+\input{disp}
+\begin{document}
+\begin{tikzpicture}
+
+
+\draw[pattern=north east lines] (0,0) rectangle (15,-0.2);
+
+\begin{scope}[xshift=9cm]
+    \xdef\symi{}
+    \xdef\symii{1}
+    \xdef\symiii{0}
+    \xdef\symiiii{0}
+    \input{gwinstek_gps3030d}
+    % высота 3.6cm, ширина 3cm. Ноды подключения powerm, powerp, gnd
+    \draw (1.5,4) node {5} circle (0.7em);
+\end{scope}
+
+\begin{scope}
+    \input{unit_utg9010c}
+    \draw (2.2,-0.7) node {2} circle (0.7em);
+    % высота 2см, ширина 5см. Нода подключения - выход gen-output
+\end{scope}
+\begin{scope}[yshift=2cm]
+    \input{ocy_10a}
+    \draw (2.2,2.5) node {1} circle (0.7em);
+    % высота 2см, ширина 5см. Нода подключения - выход xin, yin
+\end{scope}
+
+\begin{scope}[xshift=5cm]
+    \input{appa201n}
+    \draw (2,5.5) node {3} circle (0.7em);
+    \draw (2,-0.9) node {4} circle (0.7em);
+    % высота 1см, ширина 4см. Ноды подключения input_com, input_A,
+    % input_mA, input_A
+\end{scope}
+
+
+\begin{scope}[xshift=5.5cm,yshift=1.5cm]
+    \input{device}
+    % высота 3см, ширина 3см. 
+    % Ноды подключения 
+    % input
+    % output
+    % inputD
+    % inputR3
+    % inputR1
+    % inputR2
+    % inputS
+\end{scope}
+
+\draw[line width=1.2pt,black,double,rounded corners] 
+    (output) 
+    -- ++ (0.25,0)
+    -- ++ (0,0.75)
+    -|  (yin);
+% black,rounded corners,dashed
+
+\draw[line width=1.2pt,black,double,rounded corners] 
+    (input) 
+    -- ++ (-0.6,0)
+    |-  (gen-output);
+
+
+
+
+\draw[line width=1.2pt,red,double,rounded corners] 
+    (inputR3) 
+    -- ++ (0.25,0)
+    -- ++ (0,-0.7)
+    -- ++ (-0.75,-0)
+    |-  (input_com);
+
+\draw[line width=1.2pt,red,double,rounded corners] 
+    (input_mA) 
+    -- ++ (1.35,0)
+    -- ++ (0,0.75)
+    -|
+    (powerp);
+
+\draw[line width=1.2pt,black,double,rounded corners] 
+    (inputS) 
+    -- ++ (0,-1.4)
+    -|
+    (powerm);
+
+\begin{scope}[xshift=12cm]
+    \xdef\symi{-}
+    \xdef\symii{2}
+    \xdef\symiii{0}
+    \xdef\symiiii{8}
+    \input{gwinstek_gps3030d}
+    \draw (1.5,4) node {6} circle (0.7em);
+    % высота 3.6cm, ширина 3cm. Ноды подключения powerm, powerp, gnd
+\end{scope}
+
+
+
+\draw[line width=1.2pt,red,rounded corners,double] 
+    (inputR2) 
+    -- ++ (0,-1.6)
+    -- ++ (6,0)
+    -- ++ (0,1.3)
+    -|
+    (powerp);
+
+
+\draw[line width=1.2pt,black,double,rounded corners] 
+    (inputR1) 
+    -- ++ (-0.33,0)
+    -- ++ (0,-2.35)
+    -|
+    (powerm);
+
+
+
+
+\end{tikzpicture} 
+\end{document}

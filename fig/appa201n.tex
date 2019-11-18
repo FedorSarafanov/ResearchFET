@@ -1,0 +1,41 @@
+%!TEX root = view.tex
+
+\definecolor{display}{HTML}{BBAB8C}
+\definecolor{package}{HTML}{5D5460}
+
+    \draw[fill=package] (0,0) rectangle (4,1);
+    \draw[fill=display] (0+0.1,0+0.1) rectangle (1.5-0.1,1-0.1);
+
+    \begin{scope}[xshift=0.11cm]
+    % \draw[line width=1pt] (0.05,0.5) -- ++ (0.1,0);
+    \draw (0.35,0.5) node [scale=0.6] {\sevensegnum[slant = 4,oncolor=black,offcolor=display]{0}};
+    \draw (0.7,0.5) node [scale=0.6] {\sevensegnum[slant = 4,oncolor=black,offcolor=display]{0}};
+    \draw (1.05,0.5) node [scale=0.6] {\sevensegnum[slant = 4,oncolor=black,offcolor=display]{1}};
+
+    \draw[fill=black, draw=none] 
+        (0.85,0.27) -- ++ ({90-4}:1pt) -- ++ (1pt,0) -- ++ ({-90-4}:1pt) -- cycle;
+
+    \draw [fill=gray!70!black] (2.5,0.5) circle (0.4cm);
+    \draw[line width=3pt,gray!40!black] (2.5,0.5) -- ++(60:0.38);
+    \draw[fill=white!60!black, draw=none] (2.5,0.5)  ++(60:0.3) circle (1pt);
+    \draw[line width=3pt,gray!40!black] (2.5,0.5) -- ++(60+180:0.38);
+
+        \begin{scope}[yshift=0.05cm]
+        \draw[fill=black!70!gray,rounded corners=1.5pt] (1.4,0.1) rectangle ++ (0.3,0.1);
+        \draw[fill=black!70!gray,rounded corners=1.5pt] (1.4,0.25) rectangle ++ (0.3,0.1);
+        \draw[fill=black!70!gray,rounded corners=1.5pt] (1.4,0.40) rectangle ++ (0.3,0.1);
+        \draw[fill=black!70!gray,rounded corners=1.5pt] (1.4,0.55) rectangle ++ (0.3,0.1);
+        \draw[fill=black!70!gray!20!yellow,rounded corners=1.5pt] (1.4,0.70) rectangle ++ (0.3,0.1);    
+        \end{scope}
+
+    \end{scope}
+
+
+\draw[fill=black!70!gray] (3.4,0.25) circle (3pt) coordinate (input_com);
+\draw[fill=red!85!black] (3.4,0.25+0.4) circle (3pt) coordinate (input_A);
+\draw[fill=red!85!black] (3.8,0.25) circle (3pt) coordinate (input_mA);
+\draw[fill=red!85!black] (3.8,0.25+0.4) circle (3pt) coordinate (input_V);
+\draw[black] (3.4,0.25+0.4) circle (1.2pt);
+\draw[black] (3.4,0.25) circle (1.2pt);
+\draw[black] (3.8,0.25) circle (1.2pt);
+\draw[black] (3.8,0.25+0.4) circle (1.2pt);

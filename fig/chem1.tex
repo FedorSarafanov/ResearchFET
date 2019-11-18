@@ -1,0 +1,114 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[english,russian]{babel}
+\usepackage[T2A,T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\input{tikz.tex} 
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+\usepackage
+    {
+        tikz,
+        pgfplots,
+        verbatim,
+        bm
+    }
+\usetikzlibrary
+    {
+        arrows,
+        patterns,
+        angles,
+        quotes,
+        arrows.meta,
+        arrows.spaced,
+        calc, 
+        3d,  
+        fit,
+        backgrounds, 
+        positioning
+    }
+\usetikzlibrary{fadings,through}
+\tikzset
+    {
+        media/.style={font={\footnotesize\sffamily}},
+        wave/.style={
+            decorate,decoration={snake,post length=1.4mm,amplitude=2mm,
+                segment length=1mm},thick},   
+    }
+\tikzset{
+  pics/carc/.style args={#1:#2:#3}{
+    code={
+      \draw[pic actions] (#1:#3) arc(#1:#2:#3);
+    }
+  }
+}
+
+\input{disp}
+\begin{document}
+\begin{tikzpicture}
+
+\tikzset{Rs/.style={}}
+\ctikzset{bipoles/length=0.8cm}
+
+% \begin{circuitikz}[scale=1.1]
+%   \xdef\darkness{10}
+%   \xdef\opa{0.11}
+
+    \tikzstyle{every node}=[font=\footnotesize, text=black]
+
+    % \xdef\SIZE{3}
+    % \xdef\setka{1}
+    % \begin{scope}[yshift=-2.1cm, xshift=-1.5cm]
+    %   \input{setka}
+    % \end{scope}
+
+
+    \draw (0,0) node[njfet, scale=1] (fet) {} node[right, xshift=0.5em,yshift=0em] {} ++(-0.2,0) circle(0.35);
+    
+    \draw (fet.G) -- ++ (-0.5,0) coordinate (G);
+
+
+
+    \draw (G) to[R,l_=$R_1\ 900\mathrm{k}$] ++ (-1,0)
+        to ++(-1,0)  to[short,*-*,rmeter, t=V] ++ (0,-1) coordinate (e2v) to ++ (2,0);
+    \draw (G) to[short,*-*,R,l_=$R_2\ 100\mathrm{k}$] ++ (0,-1) -| (fet.S);
+
+    \draw (e2v) to[short,*-] ++ (-.75,0)
+        to [battery1,l^=$E_2$] ++ (0,1) to[short,-*] ++(.75,0);
+
+    \draw (e2v)++(.6,0) to[short,*-] ++(0,1.5)
+        to ++(-.6,0) coordinate (e1v);
+
+    \draw (e1v) ++ (0,1) to[short,*-] 
+        ++ (-.75,0)
+        to [battery1,l_=$E_1$] ++ (0,-1) to[short,-*] ++(.75,0) coordinate (e1v2);
+
+    \draw (e1v) ++ (0,1) to[short,*-*,rmeter, t=V] (e1v2);
+    \draw (e1v) ++ (0,1) to[rmeter, t=A] ++(2,0) coordinate (a);
+
+    \draw (a) -| (fet.D);
+
+    % -| ++ (0,0.54) 
+        % to[C,l^=$C_1$] ++ (-0.9,0) coordinate (input);
+
+    % \draw (fet.D) -- node[pos=0.333] (fetD) {}
+    %     ++ (1.5,0) coordinate (output);
+
+    % \draw (fetD) to[short,*-] ++ (0,-1) coordinate (fetD2)
+    %              to[short,*-] ++ (1,0) coordinate (inputD);
+
+
+    % \draw (fetD2) to ++ (0,-1) to[R, l^=$R_3$] ++ (1,0) coordinate (inputR3);
+
+    % \draw (fetG) to ++ (-0.3,0) to[R,l_=$R_1$] ++ (-1,0) to ++(-0.6,0) coordinate (inputR1);;
+
+    % \draw (fetG)  to[short,*-*,R,l^=$R_2$] ++ (0,-1.455) coordinate (R2);
+ 
+    % \draw (fet.S) -- ++ (0,-1.195) coordinate (fetS);
+
+    % \draw (fetS) to[short,*-] (R2) to ++ (-0.15,0) to ++(0,-0.5) coordinate (inputR2);
+    % \draw (fetS) -- ++(0.25,0) to ++(0,-0.5) coordinate (inputS);
+
+
+
+\end{tikzpicture} 
+\end{document}

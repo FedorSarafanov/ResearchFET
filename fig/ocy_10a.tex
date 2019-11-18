@@ -1,0 +1,86 @@
+%!TEX root = view.tex
+    \definecolor{package_ext}{HTML}{D3CBC8}
+    \definecolor{display}{HTML}{00BEFC}
+    \definecolor{blu}{HTML}{758493}
+    \definecolor{le}{HTML}{67FCFF}
+
+
+    \draw[fill=package_ext, rounded corners=2pt] (0,0) rectangle (5,2);
+    \draw[fill=package_ext!50!white, draw=package_ext!50!gray, rounded corners=2pt] (0.1,0.1) rectangle (1.9,1.9);
+    \draw[fill=package_ext!50!white, draw=package_ext!50!gray, rounded corners=2pt] (4.9,0.1) rectangle (2,1.9);
+
+
+    \draw[fill=blu,draw=none, rounded corners=2pt] (2,0.1) rectangle (2.5cm-0.65pt,1.9);
+    \draw[fill=blu,draw=none] (2.5cm-0.65pt,1.9) rectangle ++ (-5pt,-1.8);
+
+
+
+    \draw[opacity=0.2, line width=1.3pt] (3.4,0.1) -- ++ (0,1.8);
+    \draw[opacity=0.2, line width=1.3pt] (2.5,0.1) -- ++ (0,1.8);
+
+
+
+
+    \draw[draw=gray, fill=display] (0.3,0.3) rectangle (1.7,1.7);
+    \draw[scale=1,line width=1pt, xshift=0.3cm, yshift=1cm,domain=0:1.4,smooth,variable=\x,le] plot ({\x},{0.175*2*sin(8*deg(\x))});
+    \draw[thin,blue!50!display, opacity=0.3,step=0.175,xshift=0.3cm, yshift=0.3cm] (0,0) grid (1.4,1.4);
+
+    \draw (0.25,1.8) node [right,scale=0.39,black!50!gray] {\textbf{\textsf{ОСУ-10А}}};
+
+
+
+    \foreach \x in {{4.9-0.35}}{
+        \draw (\x,0.4) coordinate (xin);
+        \draw[fill=gray, draw=white, line width=.5pt] (xin) circle (4pt);
+        \draw[fill=white,draw=none] (xin) circle (2pt);
+        \draw[fill=black,draw=none] (xin) circle (1pt);
+    }
+
+    \foreach \x in {2.75}{
+        \draw (\x,0.4) coordinate (yin);
+        \draw[fill=gray, draw=white, line width=.5pt] (yin) circle (4pt);
+        \draw[fill=white,draw=none] (yin) circle (2pt);
+        \draw[fill=black,draw=none] (yin) circle (1pt);
+    }
+
+
+
+    \newcommand{\handle}[2] {
+    \draw (#1,#2) coordinate (ru1);
+        \draw[fill=gray!30!white] (ru1) circle (4pt);
+        \draw (ru1) -- ++ (45:4pt);
+        \draw[fill=gray!50!white] (ru1) circle (2pt);
+      }
+
+    \handle{2.73}{1.6}
+    \handle{3.17}{1.6}
+    \handle{3.65}{1.6}
+    \handle{{(3.65+4.6)/2}}{1.6}
+    \handle{4.6}{1.6}
+    \handle{2.25}{1.2}
+    \handle{2.25}{0.8}
+
+    \draw (2.25,1.6) coordinate (ru1);
+        \draw[fill=gray!30!white] (ru1) circle (3pt);
+        \draw[fill=gray!20!white] (ru1) circle (2pt);
+    \draw[fill=red] (2.25,1.8) circle (1pt);
+
+    \newcommand{\handleV}[2] {
+    \draw (#1,#2) coordinate (ru1);
+        \draw[fill=gray!5!white,draw=gray] (ru1) circle (8pt);
+        \draw[fill=gray!10!white,draw=gray] (ru1) circle (7pt);
+        \draw[line width=1.2pt, gray] (ru1) ++ (45:6pt) -- ++ (45:2pt);
+        \foreach \theta in {-45,-18,...,225}{
+            \draw[thick, black!20!gray] (ru1) ++ (\theta:9pt) -- ++ (\theta:2pt);
+        }
+      }
+
+    \handleV{{5.9/2}}{1}
+    \handleV{{(3.4+4.85)/2}}{1}
+ \foreach \x in {3.12,3.32,3.65,3.85,4.05,4.25}{
+    \draw[xshift=-2pt] (\x,0.4) node[minimum width=4pt,minimum height=4pt, inner sep=0pt, fill=white!99!gray, draw=gray,thin, rounded corners=0.2pt] (rect) {};
+}
+    \draw[xshift=-2pt] (3.65,0.6) node[minimum width=4pt,minimum height=4pt, inner sep=0pt, fill=white!99!gray, draw=gray,thin, rounded corners=0.2pt] (rect) {};
+    \draw[xshift=-2pt] (3.65,1.25) node[minimum width=4pt,minimum height=4pt, inner sep=0pt, fill=white!99!gray, draw=gray,thin, rounded corners=0.2pt] (rect) {};
+    \draw[xshift=-2pt] (4.7,1.25) node[minimum width=4pt,minimum height=4pt, inner sep=0pt, fill=white!99!gray, draw=gray,thin, rounded corners=0.2pt] (rect) {};
+=
